@@ -3,12 +3,12 @@ class Search {
     static get(url) {
         let xhr = new XMLHttpRequest();
 
-        xhr.open(url);
+        xhr.open("GET", url);
 
         xhr.send();
 
         return new Promise((resolve, reject) => {
-            xhr.onreadystatechange = () => {
+            xhr.onreadystatechange = ()=> {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
                         //todo salio bien
@@ -34,5 +34,5 @@ class Autocomplete { }
     /** aqui ponemos la direccion de donde queremos que se
  * genere la peticion ajax
  */
-    Search.get(GOOGLEBOOKSAPIURL+"harry").then(results => Console.log(results));
+    Search.get(GOOGLEBOOKSAPIURL+"harry").then(results => console.log(results));
 })();
