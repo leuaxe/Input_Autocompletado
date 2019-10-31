@@ -29,9 +29,11 @@ class Autocomplete {
     //generamos un DataList y lo enlazamos con el input para 
     //mostrar a lista de libros obtenidos
     constructor(input_selector, base_url){
+        this.search = this.search.bind(this);
         this.input = document.querySelector(input_selector);
         this.url = base_url;
         this.value = "";
+        this.interval = null;
         this.buildDataList();
         this.bindEvents();   
     }
@@ -44,7 +46,9 @@ class Autocomplete {
             if (this.value == "") {
                 return;
             }
-            this.search();
+
+            //damos un tiempo antes de realizar la busqueda de lo ingresado en el input
+            this.interval = window.setTimeout(this.search, 500)
         })
     }
 
