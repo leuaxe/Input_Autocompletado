@@ -28,9 +28,10 @@ class Search {
 class Autocomplete {
     //generamos un DataList y lo enlazamos con el input para 
     //mostrar a lista de libros obtenidos
-    constructor(input_selector){
+    constructor(input_selector, base_url){
         this.input = document.querySelector(input_selector);
-        this.buildDataList();
+        this.url = base_url;
+        this.buildDataList();   
     }
 
     buildDataList(){
@@ -39,13 +40,14 @@ class Autocomplete {
         //se asigna un id que servira para enlazar con el input
         this.dataList.id = "datalist-autocomplete";
         //insertamos un nuevo elemento
-        this.querySelector("body").appendChild(this.dataList);
+        document.querySelector("body").appendChild(this.dataList);
         this.input.setAttribute("list", "datalist-autocomplete");
     }
 
     //metodo que realizara la busqueda
     search(){
-        Search.get(GOOGLEBOOKSAPIURL+"harry").then(results => console.log(results));
+        Search.get(this.url+"harry")
+        .then(results => this.build(results));
     }
 
     //metodo que construira todos los option de nuestra lista
@@ -68,10 +70,7 @@ class Autocomplete {
 
 /*closure*/
 (function () {
-    const GOOGLEBOOKSAPIURL = "https://www.googleapis.com/books/v1/volumes?q="; 
-
-    /** aqui ponemos la direccion de donde queremos que se
- * genere la peticion ajax
- */
-    
+    const GOOGLEBOOKSAPIURL = "https://www.googleapis.com/books/v1/volumes?q=";
+    let autocomplete = new Autocomplete("#searcher", GOOGLEBOOKSAPIURL);
+    autocomplete.search();
 })();
