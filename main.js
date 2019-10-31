@@ -42,6 +42,23 @@ class Autocomplete {
         this.querySelector("body").appendChild(this.dataList);
         this.input.setAttribute("list", "datalist-autocomplete");
     }
+
+    //metodo que construira todos los option de nuestra lista
+    build(response){
+        //vaciamos el elemento datalist por si tenia opciones anteriores
+        this.dataList.innerHTML = "";
+        response.items.forEach(item => {
+            let optionEl = document.createElement("option");
+            optionEl.value = item.volumeInfo.title;
+            //si el libro tiene un subtitulo lo agrega en el titulo
+            if (item.volumeInfo.subtitle) {
+                optionEl.innerHTML = item.volumeInfo.title;
+            }
+
+            //llena con el contenido el elemento datalist
+            this.dataList.appendChild(optionEl);
+        });
+    }
  }
 
 /*closure*/
