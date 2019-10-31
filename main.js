@@ -40,12 +40,19 @@ class Autocomplete {
 
     bindEvents(){
         this.input.addEventListener("keyup", () =>{
-            //obtenemos el valor del input
-            this.value = this.input.value;
-            //validamos campos
-            if (this.value == "") {
+            
+            //realizamos varias validaciones
+            //si el valor del input es el mismo que ingresamos y tiene menos de 
+            //3 caracteres da el return 
+            if (this.input.value == this.value || this.input.value.length < 3 ) {
                 return;
             }
+            //cuando llega aca elimina el intervalo
+            if (this.interval) {
+                window.clearInterval(this.interval);
+            }
+            //obtenemos el valor del input
+            this.value = this.input.value;
 
             //damos un tiempo antes de realizar la busqueda de lo ingresado en el input
             this.interval = window.setTimeout(this.search, 500)
