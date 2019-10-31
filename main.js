@@ -25,7 +25,22 @@ class Search {
 
 
 
-class Autocomplete { }
+class Autocomplete {
+    //generamos un DataList y lo enlazamos con el input para 
+    //mostrar a lista de libros obtenidos
+    constructor(input_selector){
+        this.input = document.querySelector(input_selector);
+        this.buildDataList();
+    }
+
+    buildDataList(){
+        //creamos el elemento dataList
+        this.dataList = document.createElement("datalist");
+        //se asigna un id que servira para enlazar con el input
+        this.dataList.id = "datalist-autocomplete";
+        this.input.setAttribute("list", "datalist-autocomplete");
+    }
+ }
 
 /*closure*/
 (function () {
