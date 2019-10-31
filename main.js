@@ -38,6 +38,8 @@ class Autocomplete {
         this.dataList = document.createElement("datalist");
         //se asigna un id que servira para enlazar con el input
         this.dataList.id = "datalist-autocomplete";
+        //insertamos un nuevo elemento
+        this.querySelector("body").appendChild(this.dataList);
         this.input.setAttribute("list", "datalist-autocomplete");
     }
  }
