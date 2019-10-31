@@ -40,6 +40,10 @@ class Autocomplete {
         this.input.addEventListener("keyup", () =>{
             //obtenemos el valor del input
             this.value = this.input.value;
+            //validamos campos
+            if (this.value == "") {
+                return;
+            }
             this.search();
         })
     }
