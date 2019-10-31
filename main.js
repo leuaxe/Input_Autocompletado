@@ -43,6 +43,11 @@ class Autocomplete {
         this.input.setAttribute("list", "datalist-autocomplete");
     }
 
+    //metodo que realizara la busqueda
+    search(){
+        Search.get(GOOGLEBOOKSAPIURL+"harry").then(results => console.log(results));
+    }
+
     //metodo que construira todos los option de nuestra lista
     build(response){
         //vaciamos el elemento datalist por si tenia opciones anteriores
@@ -68,5 +73,5 @@ class Autocomplete {
     /** aqui ponemos la direccion de donde queremos que se
  * genere la peticion ajax
  */
-    Search.get(GOOGLEBOOKSAPIURL+"harry").then(results => console.log(results));
+    
 })();
