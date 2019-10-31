@@ -31,7 +31,17 @@ class Autocomplete {
     constructor(input_selector, base_url){
         this.input = document.querySelector(input_selector);
         this.url = base_url;
-        this.buildDataList();   
+        this.value = "";
+        this.buildDataList();
+        this.bindEvents();   
+    }
+
+    bindEvents(){
+        this.input.addEventListener("keyup", () =>{
+            //obtenemos el valor del input
+            this.value = this.input.value;
+            this.search();
+        })
     }
 
     buildDataList(){
@@ -46,7 +56,7 @@ class Autocomplete {
 
     //metodo que realizara la busqueda
     search(){
-        Search.get(this.url+"harry")
+        Search.get(this.url+this.value)
         .then(results => this.build(results));
     }
 
@@ -72,5 +82,4 @@ class Autocomplete {
 (function () {
     const GOOGLEBOOKSAPIURL = "https://www.googleapis.com/books/v1/volumes?q=";
     let autocomplete = new Autocomplete("#searcher", GOOGLEBOOKSAPIURL);
-    autocomplete.search();
 })();
